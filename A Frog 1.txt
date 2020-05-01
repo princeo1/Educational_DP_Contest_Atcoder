@@ -1,0 +1,56 @@
+/*Name:- Prince Soni
+College:- Jalpaiguri Government Engineering College*/
+ 
+/*.........Range of different integers and macro used by stl c++...................................................
+ 
+Data Type                              Range                      Macro for min value           Macro for max value
+char                                -128 to +127                        CHAR_MIN                      CHAR_MAX
+short char                          -128 to +127                       SCHAR_MIN                     SCHAR_MAX
+unsigned char                         0  to 255                             0                        UCHAR_MAX
+ 
+short int                         -32768 to +32767                      SHRT_MIN                      SHRT_MAX
+unsigned short int                    0  to  65535                          0                        USHRT_MAX 
+int                          -2147483648 to +2147483647                  INT_MIN                       INT_MAX
+unsigned int                          0  to  4294967295                     0                         UINT_MAX
+long int            -9223372036854775808 to +9223372036854775807        LONG_MIN                      LONG_MAX
+unsigned long int                     0  to  18446744073709551615           0                        ULONG_MAX 
+long long int       -9223372036854775808 to +9223372036854775807       LLONG_MIN                     LLONG_MAX
+unsigned long long int                0  to  18446744073709551615           0                       ULLONG_MAX
+ 
+float                        1.17549e-38 to  3.40282e+38                 FLT_MIN                       FLT_MAX
+float(negative)             -1.17549e-38 to -3.40282e+38                -FLT_MIN                      -FLT_MAX
+double                      2.22507e-308 to  1.79769e+308                DBL_MIN                       DBL_MAX
+double(negative)           -2.22507e-308 to -1.79769e+308               -DBL_MIN                      -DBL_MAX
+ 
+ 
+......................................................................*/
+ 
+#include <bits/stdc++.h> 
+using namespace std; 
+ 
+#define ll long long int
+#define fio ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define fr(i,n) for(ll i=0;i<n;i++)
+#define fr1(i,n) for(ll i=1;i<=n;i++)
+#define MAX 100000
+ 
+int main() 
+{ 
+    fio;
+    ll n;
+    cin>>n;
+    ll h[n+1];
+    fr1(i,n)
+    cin>>h[i];
+    ll dp[MAX+1];
+    dp[0]=0;
+    dp[1]=0;
+    dp[2]=abs(h[2]-h[1]);
+    dp[3]=min((abs(h[1]-h[2])+abs(h[2]-h[3])),abs(h[1]-h[3]));
+    for(ll i=4;i<=n;i++)
+    {
+        dp[i]=min((dp[i-1]+abs(h[i]-h[i-1])),(dp[i-2]+abs(h[i]-h[i-2])));
+    }
+    cout<<dp[n];
+}
